@@ -1,7 +1,7 @@
 # Spring Boot configuration
 spring:
   profiles:
-    active: prod
+    active: dev
   # JPA properties
   jpa:
     hibernate:

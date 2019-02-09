@@ -10,6 +10,6 @@ import tech.locationapi.api.Models.State;
 public interface StateRepository extends JpaRepository<State, Long> {
 
      State getStateByStateCode(String name);
-     State getStateByStateName(String name);
+     State getStateByStateNameIgnoreCase(String name);
 
 }

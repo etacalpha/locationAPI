@@ -50,8 +50,10 @@ public class LocationService {
         try {
             if (name.length()==2) {
                 state = this.state.getStateByStateCode(name.toUpperCase());
+                System.out.println("Get by code!");
             }else {
-                state = this.state.getStateByStateName(name.toUpperCase());
+                state = this.state.getStateByStateNameIgnoreCase(name.toUpperCase());
+                System.out.println("Get by Name!");
             }
         }catch (Exception e){
             e.printStackTrace();
