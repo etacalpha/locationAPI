@@ -1,0 +1,11 @@
+# Spring Boot configuration
+spring:
+  # Database
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/US_Locatinos?createDatabaseIfNotExist=true
+    username: LOCATIONAPI
+    password: LIVELONGANDPROSPER
+# Server configuration
+server:
+  port: 8080
