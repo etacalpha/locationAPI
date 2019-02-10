@@ -45,19 +45,19 @@ public class LocationService {
      * @param name
      * @return
      */
-    public State getState(String name) {
+    public State getState(String name) throws Exception {
         State state= new State();
-        try {
             if (name.length()==2) {
                 state = this.state.getStateByStateCode(name.toUpperCase());
+
                 System.out.println("Get by code!");
             }else {
                 state = this.state.getStateByStateNameIgnoreCase(name.toUpperCase());
                 System.out.println("Get by Name!");
             }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+            if (state.getId()==null){
+                throw new Error("State does not exist");
+            }
         return state;
     }
 
@@ -68,20 +68,21 @@ public class LocationService {
      * @param city
      * @return
      */
-    public City getCityFromState(String state, String city){
+    public City getCityFromState(String state, String city) throws Exception {
         State stateName;
         City foundCity = new City();
-        try {
             stateName=getState(state);
+        if (stateName.getId()==null){
+            throw new Error("State does not exist or is misspelled");
+        }
             ArrayList<City> cities = new ArrayList<>(stateName.getCities());
             for (City item:cities) {
                 if (item.getCity().toLowerCase().equals(city.toLowerCase())){
                     foundCity=item;
                 }
             }
-        }
-        catch (Exception e){
-            e.printStackTrace();
+        if (foundCity.getId()==null){
+            throw new Error("City does not exist or is misspelled");
         }
         return foundCity;
     }
@@ -99,7 +100,7 @@ public class LocationService {
             location.put("Latitude",foundCity.getLatitude());
             location.put("Longitude",foundCity.getLongitude());
         }catch (Exception e){
-            e.printStackTrace();
+            throw new Error("State or City does not exist!");
         }
         return location;
     }

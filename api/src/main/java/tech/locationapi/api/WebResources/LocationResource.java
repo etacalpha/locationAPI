@@ -2,7 +2,9 @@ package tech.locationapi.api.WebResources;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import tech.locationapi.api.Services.LocationService;
 
 import java.util.Map;
@@ -16,66 +18,54 @@ public class LocationResource {
         this.service = service;
     }
 
-
+    /**
+     *
+     * @param district
+     * @return
+     */
     @GetMapping("/api/all/")
     public ResponseEntity<?> listAll(@RequestParam String district) {
+        if (!district.toLowerCase().equals("cities") && !district.toLowerCase().equals("states")) {
+            throw new Error("Parameter misspelled");
+        }
         if (district.toLowerCase().equals("cities")) {
             return new ResponseEntity<>(service.getAllCities(), HttpStatus.OK);
-
-        }
-        if (district.toLowerCase().equals("states")) {
+        }else
             return new ResponseEntity<>(service.getAllStates(), HttpStatus.OK);
-
-        } else
-            return new ResponseEntity<>("ERROR BAD REQUEST", HttpStatus.BAD_REQUEST);
-
     }
 
-
-    @GetMapping(value = "/api/getState/")
-    public ResponseEntity<?> getStates(@RequestParam String state) {
-        try {
-            return new ResponseEntity<>(service.getState(state), HttpStatus.OK);
-
-        } catch (Exception e) {
-            e.printStackTrace();
+    /**
+     *
+     * @param state
+     * @param city
+     * @return
+     */
+    @GetMapping("/api/getone/")
+    public ResponseEntity<?> getStates(@RequestParam String state, @RequestParam(required = false) String city) {
+        if (state.length()<2){
+            throw new Error("Misspelled state");
         }
-        return new ResponseEntity<>("Error with request", HttpStatus.BAD_REQUEST);
-    }
-
-
-    @GetMapping(value = "/api/getCity/")
-    public ResponseEntity<?> getCities(@RequestParam String state, @RequestParam(required = false) String city) {
+        try {
         if (city != null && state != null) {
-            try {
-                return new ResponseEntity<>(service.getCityFromState(state, city), HttpStatus.OK);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                return new ResponseEntity<>("Error with request", HttpStatus.BAD_REQUEST);
-            }
-        } else if (city == null && state != null) {
-            try {
-                return new ResponseEntity<>(service.getState(state), HttpStatus.OK);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            return new ResponseEntity<>(service.getCityFromState(state, city), HttpStatus.OK);
         }
-        return new ResponseEntity<>("Error with request", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(service.getState(state), HttpStatus.OK);
+        } catch (Exception e) {
+            throw new Error("Item not found or misspelled");
+        }
     }
 
-
-    @GetMapping(value = "/api/getGeoLocation/")
+    /**
+     *
+     * @param state
+     * @param city
+     * @return
+     */
+    @GetMapping("/api/getlocation/")
     public ResponseEntity<?> getGeolocation(@RequestParam String state, @RequestParam String city) {
-        if (state == null || city == null) {
-            return new ResponseEntity<>("You forgot something", HttpStatus.BAD_REQUEST);
+        if (state.length()<2){
+            throw new Error("Misspelled state");
         }
-        try {
-            return new ResponseEntity<Map>(service.getCityLocationFromState(state, city), HttpStatus.OK);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return new ResponseEntity<>("Error", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<Map>(service.getCityLocationFromState(state, city), HttpStatus.OK);
     }
 }
