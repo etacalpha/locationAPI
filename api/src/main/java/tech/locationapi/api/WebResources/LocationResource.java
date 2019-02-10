@@ -9,6 +9,9 @@ import tech.locationapi.api.Services.LocationService;
 
 import java.util.Map;
 
+/**
+ *  Rest Controller with allowing users to get info from DB
+ */
 @RestController
 public class LocationResource {
 
@@ -18,10 +21,11 @@ public class LocationResource {
         this.service = service;
     }
 
+
     /**
-     *
-     * @param district
-     * @return
+     * Endpoint to get all states or all cities
+     * @param district must be "cities" or "states" to choose what resource to get
+     * @return all states or all cities
      */
     @GetMapping("/api/all/")
     public ResponseEntity<?> listAll(@RequestParam String district) {
@@ -34,11 +38,13 @@ public class LocationResource {
             return new ResponseEntity<>(service.getAllStates(), HttpStatus.OK);
     }
 
+
     /**
-     *
-     * @param state
-     * @param city
-     * @return
+     *  Endpoint to get one state(plus cities for that state) or one city
+     * @param state can be abbreviation or full name
+     * @param city (optional) selects the city to return information for if no
+     *             city is selected will return state information
+     * @return state object or city object in JSON format
      */
     @GetMapping("/api/getone/")
     public ResponseEntity<?> getStates(@RequestParam String state, @RequestParam(required = false) String city) {
@@ -55,11 +61,12 @@ public class LocationResource {
         }
     }
 
+
     /**
-     *
-     * @param state
-     * @param city
-     * @return
+     *  Endpoint to get lat/ Long of selected city
+     * @param state can be abbreviation or full name
+     * @param city used to select city from state
+     * @return lat/long of selected city in JSON format
      */
     @GetMapping("/api/getlocation/")
     public ResponseEntity<?> getGeolocation(@RequestParam String state, @RequestParam String city) {

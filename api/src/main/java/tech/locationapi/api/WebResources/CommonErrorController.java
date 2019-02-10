@@ -13,6 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 
+
+/**
+ * Handles errors from LocationService and LocationResource
+ */
 @Controller
 public class CommonErrorController implements ErrorController {
 
@@ -23,20 +27,21 @@ public class CommonErrorController implements ErrorController {
         this.errorAttributes = errorAttributes;
     }
 
+
     @RequestMapping(value = "error")
     @ResponseBody
     public ExceptionResponse error(WebRequest webRequest, HttpServletResponse response) {
         return new ExceptionResponse(response.getStatus(), getErrorAttributes(webRequest));
     }
 
+
     @Override
     public String getErrorPath() {
         return "error";
     }
 
+
     private Map<String, Object> getErrorAttributes(WebRequest webRequest) {
-        Map<String, Object> errorMap = new HashMap<>();
-        errorMap.putAll(errorAttributes.getErrorAttributes(webRequest, false));
-        return errorMap;
+        return new HashMap<>(errorAttributes.getErrorAttributes(webRequest, false));
     }
 }

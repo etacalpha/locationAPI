@@ -1,7 +1,7 @@
 # Spring Boot configuration
 spring:
   profiles:
-    active: dev
+    active: prod
   # JPA properties
   jpa:
     hibernate:
@@ -11,6 +11,12 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     open-in-view: true
     generate-ddl: false
+# Server configuration
+server:
+  port: 8080
+  error:
+    whitelabel:
+      enabled: false
 
 
 
