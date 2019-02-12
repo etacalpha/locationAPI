@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+  <head>
+    <title>Location API</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/css/bootstrap.min.css"
+      integrity="sha384-PDle/QlgIONtM1aqA2Qemk5gPOE7wFq8+Em+G/hmo5Iq0CCmYZLv3fVRDJ4MMwEA"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" type="text/css" href="./CSS/main.css" />
+  </head>
+  <body>
+    <header class="container">
+      <h1>Welcome to the Location API</h1>
+    </header>
+    <section class="container">
+      <div class="endpointContainer">
+        <h3>
+          This API returns location information about cities in the U.S. There
+          are three endpoints to limit the amount of data returned.
+          Check out the  <a href="http://locationapi.tech/swagger-ui.html#/">swagger docs</a>
+        </h3>
+      </div>
+      <div class="endpointContainer">
+        <h5>
+          The first endpoint is
+          <span class="endpoint">http://locationapi.tech/api/all</span>
+        </h5>
+        <p>
+          It will return either all the states and their cities or return all
+          the cities. The request parameter for this end point is "district".
+          You can search by states or cities.
+        </p>
+        <p class="examplecall">
+          http://locationapi.tech/api/all/?district=states
+        </p>
+        <div class="JSON">
+          <div class="image">
+            <img src="./images/statesJSON.png" alt="image of JSON" />
+          </div>
+        </div>
+      </div>
+
+      <div class="endpointContainer">
+        <h5>
+          The second endpoint is
+          <span class="endpoint">http://locationapi.tech/api/getone/</span>
+        </h5>
+        <p>
+          It will return either one state and it's cities or one city. The
+          request parameters for this end point are "state"(this can be
+          abbreviation or full name, "city. The city parameter is optional.
+        </p>
+        <p class="examplecall">
+          http://locationapi.tech/api/getone/?state=al&city=Abbeville
+        </p>
+        <div class="JSON">
+          <div class="image">
+            <img src="./images/cityJSON.png" alt="image of JSON" />
+          </div>
+        </div>
+      </div>
+
+      <div class="endpointContainer">
+        <h5>
+          The final endpoint is
+          <span class="endpoint">http://locationapi.tech/api/getlocation/</span>
+        </h5>
+        <p>
+          It will return either one state and it's cities or one city. The
+          request parameters for this end point are "state"(this can be
+          abbreviation or full name), "city parameter is NOT optional on this
+          end point.
+        </p>
+        <p class="examplecall">
+          http://locationapi.tech/api/getlocation/?state=al&city=Abbeville
+        </p>
+        <div class="JSON">
+          <div class="image">
+            <img src="./images/locationJSON.png" alt="image of JSON" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"
+      integrity="sha384-7aThvCh9TypR7fIc2HV4O/nFMVCBwyIUKL8XCtKE+8xgCgl/PQGuFsvShjr74PBp"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

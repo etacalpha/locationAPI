@@ -1,5 +1,3 @@
-
---
 -- Table structure for table `us_states`
 --
 DROP TABLE IF EXISTS US_STATES;

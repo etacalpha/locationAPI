@@ -1,0 +1,25 @@
+body {
+    background-color: lightgray;
+    font-size: 1.25em;
+    margin-top: 50px;
+}
+
+.endpointContainer {
+    display: inline-block;
+    justify-content: center;
+    align-content: center;
+    margin: 40px 0 50px 0;
+}
+
+.endpointContainer h5 {
+    font-weight: 600;
+}
+
+.endpoint {
+    color: #0b772f;
+}
+
+.examplecall {
+    color: #0b772f;
+    font-weight: 700;
+}

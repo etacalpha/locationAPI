@@ -1,0 +1,23 @@
+version: "2.3"
+
+services:
+  db:
+    container_name: postgresdb
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: locationAPI
+      POSTGRESS_PASSWORD: LIVELONGANDPROSPER
+      POSTGRES_DB: "US_Locations"
+    volumes:
+      - ./postgres/init:/docker-entrypointinitdb.d/*.sql
+
+  web:
+    image: web
+    ports:
+      - "80:5000"
+    depends_on:
+      - db
+    links:
+      - db:postgresdb

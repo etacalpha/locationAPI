@@ -3,7 +3,7 @@ spring:
   # Database
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/US_Locatinos?createDatabaseIfNotExist=true
-    username: LOCATIONAPI
+    url: jdbc:postgresql://postgresdb:5432/US_Locations
+    username: locationAPI
     password: LIVELONGANDPROSPER
 
